@@ -4,6 +4,7 @@ import static java.lang.String.format;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appgaseta.R;
+import com.example.appgaseta.controller.Calculargaseta;
 import com.example.appgaseta.controller.CombustivelController;
 import com.example.appgaseta.model.Combustiveis;
 
@@ -31,7 +33,9 @@ public class MainActivityAppGaseta extends AppCompatActivity {
     Button btnFinalizar;
 
     TextView resultadoGasEta;
+    String res;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,15 +76,16 @@ public class MainActivityAppGaseta extends AppCompatActivity {
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calcularGasEta();
-                combustiveis.setGasolina(Float.parseFloat(editPrecogasolina.getText().toString()));
-                combustiveis.setEtanol(Float.parseFloat(editPrecoetanol.getText().toString()));
+                float gas = combustiveis.setGasolina(Float.parseFloat(editPrecogasolina.getText().toString()));
+                float eta = combustiveis.setEtanol(Float.parseFloat(editPrecoetanol.getText().toString()));
                 controller.salvar(combustiveis);
+                resultadoGasEta.setText(Calculargaseta.calculargaseta(gas,eta));
+                Toast.makeText(MainActivityAppGaseta.this, "Calculando...", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void calcularGasEta(){
+    /*private void calcularGasEta(){
 
         float GasolinaValor;
         float EtanolValor;
@@ -114,5 +119,5 @@ public class MainActivityAppGaseta extends AppCompatActivity {
             Toast.makeText(MainActivityAppGaseta.this, "Valor inválido", Toast.LENGTH_LONG).show();
         }
 
-    }
+    }*/
 }

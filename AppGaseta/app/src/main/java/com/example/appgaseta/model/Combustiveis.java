@@ -17,16 +17,18 @@ public class Combustiveis {
         return gasolina;
     }
 
-    public void setGasolina(float gasolina) {
+    public float setGasolina(float gasolina) {
         this.gasolina = gasolina;
+        return gasolina;
     }
 
     public float getEtanol() {
         return etanol;
     }
 
-    public void setEtanol(float etanol) {
+    public float setEtanol(float etanol) {
         this.etanol = etanol;
+        return etanol;
     }
 
 
