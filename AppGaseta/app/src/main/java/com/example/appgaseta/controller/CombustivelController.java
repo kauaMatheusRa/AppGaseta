@@ -43,13 +43,15 @@ public class CombustivelController {
 
         listaVip.putFloat("precoGasolina", combustiveis.getGasolina());
         listaVip.putFloat("precoEtanol", combustiveis.getEtanol());
+        listaVip.putString("resultado", Calculargaseta.calculargaseta(combustiveis.getGasolina(), combustiveis.getEtanol()));
         listaVip.apply();
         return combustiveis;
     }
 
     public Combustiveis buscar(Combustiveis combustiveis){
-        combustiveis.setGasolina(preferences.getFloat("precoGasolina", 0.0F));
-        combustiveis.setEtanol(preferences.getFloat("precoEtanol",0.0F));
+        float gas = combustiveis.setGasolina(preferences.getFloat("precoGasolina", 0.0F));
+        float eta = combustiveis.setEtanol(preferences.getFloat("precoEtanol", 0.0F));
+
         return combustiveis;
     }
 

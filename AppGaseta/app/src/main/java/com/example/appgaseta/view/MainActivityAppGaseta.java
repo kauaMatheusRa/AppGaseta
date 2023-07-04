@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,6 @@ public class MainActivityAppGaseta extends AppCompatActivity {
     Button btnFinalizar;
 
     TextView resultadoGasEta;
-    String res;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -62,6 +62,12 @@ public class MainActivityAppGaseta extends AppCompatActivity {
                 editPrecoetanol.setText("");
                 resultadoGasEta.setText("Resultado:");
                 controller.limpar();
+                boolean atv = true;
+
+                if (atv){
+                    btnResetar.setEnabled(false);
+                    btnFinalizar.setEnabled(false);
+                }
             }
         });
 
@@ -76,11 +82,40 @@ public class MainActivityAppGaseta extends AppCompatActivity {
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                float gas = combustiveis.setGasolina(Float.parseFloat(editPrecogasolina.getText().toString()));
-                float eta = combustiveis.setEtanol(Float.parseFloat(editPrecoetanol.getText().toString()));
-                controller.salvar(combustiveis);
-                resultadoGasEta.setText(Calculargaseta.calculargaseta(gas,eta));
-                Toast.makeText(MainActivityAppGaseta.this, "Calculando...", Toast.LENGTH_LONG).show();
+
+                boolean dadosOK = true;
+
+                if(TextUtils.isEmpty(editPrecogasolina.getText())){
+                    editPrecogasolina.setError("Obrigatório");
+                    editPrecogasolina.requestFocus();
+                    dadosOK = false;
+                }
+
+                if(TextUtils.isEmpty(editPrecoetanol.getText())){
+                    editPrecoetanol.setError("Obrigatório");
+                    editPrecoetanol.requestFocus();
+                    dadosOK = false;
+                }
+
+
+                if(dadosOK){
+                    float gas = combustiveis.setGasolina(Float.parseFloat(editPrecogasolina.getText().toString()));
+                    float eta = combustiveis.setEtanol(Float.parseFloat(editPrecoetanol.getText().toString()));
+
+                    String resultado = Calculargaseta.calculargaseta(gas,eta);
+
+                    resultadoGasEta.setText(resultado);
+                    Toast.makeText(MainActivityAppGaseta.this, "Calculando...", Toast.LENGTH_LONG).show();
+                    controller.salvar(combustiveis);
+                    btnFinalizar.setEnabled(true);
+                    btnResetar.setEnabled(true);
+                }else{
+                    btnFinalizar.setEnabled(false);
+                    btnResetar.setEnabled(false);
+                }
+
+
+
             }
         });
     }

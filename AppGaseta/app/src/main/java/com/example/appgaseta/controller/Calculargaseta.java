@@ -12,9 +12,9 @@ public class Calculargaseta {
         res = precoetanol / precogasolina;
 
         if (res <= 0.7){
-            resultado = "Resultado: Abasteça com etanol";
+            resultado = "Abasteça com etanol";
         }else {
-            resultado = "Resultado: Abasteça com gasolina";
+            resultado = "Abasteça com gasolina";
         }
 
         return resultado;
