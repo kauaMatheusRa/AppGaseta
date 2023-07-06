@@ -62,12 +62,9 @@ public class MainActivityAppGaseta extends AppCompatActivity {
                 editPrecoetanol.setText("");
                 resultadoGasEta.setText("Resultado:");
                 controller.limpar();
-                boolean atv = true;
 
-                if (atv){
-                    btnResetar.setEnabled(false);
-                    btnFinalizar.setEnabled(false);
-                }
+                btnResetar.setEnabled(false);
+                btnFinalizar.setEnabled(false);
             }
         });
 
