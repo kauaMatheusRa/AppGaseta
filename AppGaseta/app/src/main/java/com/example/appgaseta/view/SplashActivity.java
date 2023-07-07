@@ -11,7 +11,7 @@ import com.example.appgaseta.database.GasEtaDb;
 
 public class SplashActivity extends AppCompatActivity {
 
-    public static final int TIME_OUT_SPLASH = 3000;
+    public static final int TIME_OUT_SPLASH = 8000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
